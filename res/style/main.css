@@ -1,0 +1,20 @@
+* {
+    primary-color: #1E88E5;
+    secondary-color: #455A64;
+    third-color: #303F9F;
+
+    -fx-prompt-text-fill: grey;
+}
+
+.button {
+    -fx-background-color: primary-color;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: third-color;
+}
+
+.clear-button {
+    -fx-background-color: secondary-color;
+}
