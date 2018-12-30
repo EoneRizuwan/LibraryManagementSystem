@@ -51,7 +51,7 @@ public class ListMemberController implements Initializable {
     private void loadData() {
         List<Member> list = memberHandler.getMembers();
         if (list.isEmpty()) {
-            AlertBox.show(Alert.AlertType.WARNING, null, "Member List is empty.");
+            AlertBox.show(Alert.AlertType.WARNING, null, "Member List is empty.", false);
         }
 
         memberList.setAll(list);

@@ -46,10 +46,10 @@ public class AddMemberController implements Initializable {
                     email.getText().trim()
             );
             if (output) {
-                AlertBox.show(Alert.AlertType.INFORMATION, "Saved", "Member was saved into database.");
+                AlertBox.show(Alert.AlertType.INFORMATION, "Saved", "Member was saved into database.", false);
                 clearField();
             } else
-                AlertBox.show(Alert.AlertType.ERROR, "Error", "Member ID provided was already registered in database.");
+                AlertBox.show(Alert.AlertType.ERROR, "Error", "Member ID provided was already registered in database.", false);
         }
     }
 
@@ -58,7 +58,7 @@ public class AddMemberController implements Initializable {
                 id.getText().matches("[a-zA-Z]+\\d+") &&
                 contactNo.getText().matches("\\(\\d{3}\\)\\s\\d+[ -]?\\d+") &&
                 email.getText().matches("\\w+@\\w+.\\w+");
-        if (!fields) AlertBox.show(Alert.AlertType.WARNING, null, "Invalid input format or empty inputs");
+        if (!fields) AlertBox.show(Alert.AlertType.WARNING, null, "Invalid input format or empty inputs", false);
         return fields;
     }
 }

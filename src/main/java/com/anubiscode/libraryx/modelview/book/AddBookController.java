@@ -46,10 +46,10 @@ public class AddBookController implements Initializable {
                     publisher.getText().trim().toUpperCase()
             );
             if (output) {
-                AlertBox.show(Alert.AlertType.INFORMATION, "Saved", "The book was saved into database.");
+                AlertBox.show(Alert.AlertType.INFORMATION, "Saved", "The book was saved into database.", false);
                 clearField();
             }
-            else AlertBox.show(Alert.AlertType.ERROR, "Error", "Book ID provided was already registered in database.");
+            else AlertBox.show(Alert.AlertType.ERROR, "Error", "Book ID provided was already registered in database.", false);
         }
     }
 
@@ -58,7 +58,7 @@ public class AddBookController implements Initializable {
                 author.getText().matches("\\w+('s)?(\\s?\\w+('s)?)*(\\s?[&,:-])?(\\s?\\w+('s)?)*") &&
                 publisher.getText().matches("\\w+('s)?(\\s?\\w+('s)?)*(\\s?[&,:-])?(\\s?\\w+('s)?)*") &&
                 id.getText().matches("[a-zA-Z]+\\d+");
-        if (!fields) AlertBox.show(Alert.AlertType.WARNING, null, "Invalid input format or empty inputs");
+        if (!fields) AlertBox.show(Alert.AlertType.WARNING, null, "Invalid input format or empty inputs", false);
         return fields;
     }
 }

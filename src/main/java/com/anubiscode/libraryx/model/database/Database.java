@@ -18,7 +18,7 @@ public class Database {
             e.printStackTrace();
         }
         if (conn == null) {
-            AlertBox.show(Alert.AlertType.ERROR, null, "Error while connecting to database.");
+            AlertBox.show(Alert.AlertType.ERROR, null, "Error while connecting to database.", true);
             System.exit(-1);
         }
         return conn;

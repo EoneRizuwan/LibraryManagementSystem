@@ -53,7 +53,7 @@ public class ListBookController implements Initializable {
     private void loadData() {
         List<Book> bookList = bookHandler.getBooks();
         if (bookList.isEmpty()) {
-            AlertBox.show(Alert.AlertType.WARNING, null, "Book List is empty.");
+            AlertBox.show(Alert.AlertType.WARNING, null, "Book List is empty.", false);
         }
 
         list.setAll(bookList);

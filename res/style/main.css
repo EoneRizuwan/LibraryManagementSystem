@@ -9,6 +9,11 @@
 .button {
     -fx-background-color: primary-color;
     -fx-text-fill: white;
+    -fx-border-radius: 0px;
+}
+
+.button MaterialDesignIconView {
+    -fx-fill: white;
 }
 
 .button:hover {
@@ -21,4 +26,22 @@
 
 .clear-button:hover {
     -fx-background-color: secondary-color;
+}
+
+.toolBoxButton {
+    -fx-background-color: #DDDDDD;
+    -fx-text-fill: black;
+}
+
+.toolBoxButton MaterialDesignIconView {
+    -fx-fill: black;
+}
+
+.toolBoxButton:hover {
+    -fx-background-color: primary-color;
+    -fx-text-fill: white;
+}
+
+.toolBoxButton:hover MaterialDesignIconView {
+    -fx-fill: white;
 }
