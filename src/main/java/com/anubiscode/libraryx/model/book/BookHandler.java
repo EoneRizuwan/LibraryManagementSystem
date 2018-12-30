@@ -33,6 +33,7 @@ public class BookHandler {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     public boolean addBook(String id, String title, String author, String publisher) {
         String sql = "INSERT INTO BOOKS(bookid, title, author, publisher) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();

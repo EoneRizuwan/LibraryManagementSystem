@@ -22,8 +22,6 @@ public class ListBookController implements Initializable {
     private ObservableList<Book> list;
 
     @FXML
-    private AnchorPane anchorPane;
-    @FXML
     private TableView<Book> tableView;
     @FXML
     private TableColumn<Book, String> idCol;
