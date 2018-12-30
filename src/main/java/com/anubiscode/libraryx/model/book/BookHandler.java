@@ -1,14 +1,17 @@
-package main.java.com.anubiscode.libraryx.model.addbook;
+package main.java.com.anubiscode.libraryx.model.book;
 
 import main.java.com.anubiscode.libraryx.model.database.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AddbookHandler {
+public class BookHandler {
 
-    public AddbookHandler() {
+    public BookHandler() {
         setupBookTable();
     }
 
@@ -44,5 +47,27 @@ public class AddbookHandler {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<Book> getBooks() {
+        List<Book> list = new ArrayList<>();
+        String sql = "SELECT * FROM BOOKS";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Book(
+                        rs.getString("bookid"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getBoolean("availability")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return list;
     }
 }
