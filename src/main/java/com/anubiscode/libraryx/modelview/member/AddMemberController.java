@@ -1,7 +1,6 @@
 package main.java.com.anubiscode.libraryx.modelview.member;
 
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -41,10 +40,10 @@ public class AddMemberController implements Initializable {
     private void saveMember() {
         if (isInputValid()) {
             boolean output = memberHandler.addMember(
-                    id.getText(),
-                    name.getText(),
-                    contactNo.getText(),
-                    email.getText()
+                    id.getText().trim().toUpperCase(),
+                    name.getText().trim().toUpperCase(),
+                    contactNo.getText().trim(),
+                    email.getText().trim()
             );
             if (output) {
                 AlertBox.show(Alert.AlertType.INFORMATION, "Saved", "Member was saved into database.");

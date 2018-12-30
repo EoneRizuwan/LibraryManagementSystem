@@ -4,7 +4,10 @@ import main.java.com.anubiscode.libraryx.model.database.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberHandler {
 
@@ -44,5 +47,25 @@ public class MemberHandler {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<Member> getMembers() {
+        List<Member> list = new ArrayList<>();
+        String sql = "SELECT * FROM MEMBERS";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Member(
+                        rs.getString("name"),
+                        rs.getString("memberid"),
+                        rs.getString("phone"),
+                        rs.getString("email")
+                        ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

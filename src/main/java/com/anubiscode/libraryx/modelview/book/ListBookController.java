@@ -8,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import main.java.com.anubiscode.libraryx.model.book.Book;
 import main.java.com.anubiscode.libraryx.model.book.BookHandler;
 import main.java.com.anubiscode.libraryx.modelview.util.AlertBox;

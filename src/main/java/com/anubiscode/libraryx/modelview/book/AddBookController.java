@@ -40,10 +40,10 @@ public class AddBookController implements Initializable {
     private void saveBook() {
         if (isInputValid()) {
             boolean output = bookHandler.addBook(
-                    id.getText().toUpperCase(),
-                    title.getText().toUpperCase(),
-                    author.getText().toUpperCase(),
-                    publisher.getText().toUpperCase()
+                    id.getText().trim().toUpperCase(),
+                    title.getText().trim().toUpperCase(),
+                    author.getText().trim().toUpperCase(),
+                    publisher.getText().trim().toUpperCase()
             );
             if (output) {
                 AlertBox.show(Alert.AlertType.INFORMATION, "Saved", "The book was saved into database.");
