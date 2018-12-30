@@ -115,11 +115,11 @@
                                     </HBox.margin>
                                     <Text fx:id="bookTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Title">
                                         <font>
-                                            <Font size="24.0"/>
+                                            <Font size="20.0"/>
                                         </font>
                                     </Text>
-                                    <Text fx:id="bookAuthor" layoutX="159.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                          text="Author">
+                                    <Text fx:id="bookAuthor" layoutX="159.0" layoutY="81.0" strokeType="OUTSIDE"
+                                          strokeWidth="0.0" text="Author">
                                         <font>
                                             <Font size="14.0"/>
                                         </font>
@@ -127,8 +127,8 @@
                                             <Insets top="10.0"/>
                                         </VBox.margin>
                                     </Text>
-                                    <Text fx:id="bookPub" layoutX="191.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                          text="Publisher">
+                                    <Text fx:id="bookPub" layoutX="191.0" layoutY="92.0" strokeType="OUTSIDE"
+                                          strokeWidth="0.0" text="Publisher">
                                         <font>
                                             <Font size="14.0"/>
                                         </font>
@@ -136,8 +136,8 @@
                                             <Insets top="5.0"/>
                                         </VBox.margin>
                                     </Text>
-                                    <Text fx:id="bookAvail" layoutX="184.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                          text="Available">
+                                    <Text fx:id="bookAvail" layoutX="184.0" layoutY="102.0" strokeType="OUTSIDE"
+                                          strokeWidth="0.0" text="Available">
                                         <font>
                                             <Font size="14.0"/>
                                         </font>
@@ -152,8 +152,8 @@
                                 <VBox.margin>
                                     <Insets left="10.0" right="10.0" top="20.0"/>
                                 </VBox.margin>
-                                <TextField fx:id="memberID" onAction="#loadMemberInfos" prefHeight="29.0" prefWidth="194.0"
-                                           promptText="Member ID">
+                                <TextField fx:id="memberID" onAction="#loadMemberInfos" prefHeight="29.0"
+                                           prefWidth="194.0" promptText="Member ID">
                                     <font>
                                         <Font size="13.0"/>
                                     </font>
@@ -167,11 +167,11 @@
                                     </HBox.margin>
                                     <Text fx:id="memberName" strokeType="OUTSIDE" strokeWidth="0.0" text="Member Name">
                                         <font>
-                                            <Font size="24.0"/>
+                                            <Font size="20.0"/>
                                         </font>
                                     </Text>
-                                    <Text fx:id="memberPhone" layoutX="159.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                          text="Phone No.">
+                                    <Text fx:id="memberPhone" layoutX="159.0" layoutY="81.0" strokeType="OUTSIDE"
+                                          strokeWidth="0.0" text="Phone No.">
                                         <font>
                                             <Font size="14.0"/>
                                         </font>
@@ -179,8 +179,8 @@
                                             <Insets top="10.0"/>
                                         </VBox.margin>
                                     </Text>
-                                    <Text fx:id="memberMail" layoutX="191.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                          text="Email">
+                                    <Text fx:id="memberMail" layoutX="191.0" layoutY="92.0" strokeType="OUTSIDE"
+                                          strokeWidth="0.0" text="Email">
                                         <font>
                                             <Font size="14.0"/>
                                         </font>
@@ -190,7 +190,7 @@
                                     </Text>
                                 </VBox>
                             </HBox>
-                            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text=" Issue">
+                            <Button onAction="#loadIssueOp" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text=" Issue">
                                 <font>
                                     <Font size="14.0"/>
                                 </font>
@@ -252,19 +252,19 @@
 
     <fx:define>
         <FXCollections fx:id="infoPanelList" fx:factory="observableArrayList">
-            <fx:reference source="bookInfoPanel" />
-            <fx:reference source="memberInfoPanel" />
+            <fx:reference source="bookInfoPanel"/>
+            <fx:reference source="memberInfoPanel"/>
         </FXCollections>
         <FXCollections fx:id="bookInfoList" fx:factory="observableArrayList">
-            <fx:reference source="bookTitle" />
-            <fx:reference source="bookAuthor" />
-            <fx:reference source="bookPub" />
-            <fx:reference source="bookAvail" />
+            <fx:reference source="bookTitle"/>
+            <fx:reference source="bookAuthor"/>
+            <fx:reference source="bookPub"/>
+            <fx:reference source="bookAvail"/>
         </FXCollections>
         <FXCollections fx:id="memberInfoList" fx:factory="observableArrayList">
-            <fx:reference source="memberName" />
-            <fx:reference source="memberPhone" />
-            <fx:reference source="memberMail" />
+            <fx:reference source="memberName"/>
+            <fx:reference source="memberPhone"/>
+            <fx:reference source="memberMail"/>
         </FXCollections>
     </fx:define>
 

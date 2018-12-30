@@ -56,5 +56,8 @@ public class ListMemberController implements Initializable {
 
         memberList.setAll(list);
         tableView.setItems(memberList);
+
+        tableView.getSortOrder().add(idCol);
+        tableView.sort();
     }
 }

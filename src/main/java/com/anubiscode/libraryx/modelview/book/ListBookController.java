@@ -58,5 +58,8 @@ public class ListBookController implements Initializable {
 
         list.setAll(bookList);
         tableView.setItems(list);
+
+        tableView.getSortOrder().add(idCol);
+        tableView.sort();
     }
 }

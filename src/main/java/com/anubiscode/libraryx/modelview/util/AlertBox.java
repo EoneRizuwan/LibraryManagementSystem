@@ -11,4 +11,11 @@ public class AlertBox {
         if (wait) alert.showAndWait();
         else alert.show();
     }
+
+    public static Alert showAndWait(Alert.AlertType alertType, String header, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert;
+    }
 }
