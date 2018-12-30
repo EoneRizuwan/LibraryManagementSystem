@@ -2,6 +2,7 @@
     primary-color: #1E88E5;
     secondary-color: #455A64;
     third-color: #303F9F;
+    forth-color: #EEE;
 
     -fx-prompt-text-fill: grey;
 }
@@ -44,4 +45,8 @@
 
 .toolBoxButton:hover MaterialDesignIconView {
     -fx-fill: white;
+}
+
+.infos-panel {
+    -fx-background-color: forth-color;
 }

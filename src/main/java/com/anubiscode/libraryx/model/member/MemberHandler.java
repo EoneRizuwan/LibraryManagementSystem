@@ -68,4 +68,25 @@ public class MemberHandler {
         }
         return list;
     }
+
+    public Member getMemberByID(String id) {
+        Member member = null;
+        String sql = "SELECT * FROM MEMBERS WHERE MEMBERID = ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                member = new Member(
+                        rs.getString("name"),
+                        id,
+                        rs.getString("phone"),
+                        rs.getString("email")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return member;
+    }
 }

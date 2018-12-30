@@ -71,4 +71,26 @@ public class BookHandler {
         }
         return list;
     }
+
+    public Book getBookByID(String id) {
+        Book book = null;
+        String sql = "SELECT * FROM BOOKS WHERE BOOKID = ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                book = new Book(
+                        id,
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getBoolean("availability")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
 }
