@@ -18,3 +18,7 @@
 .clear-button {
     -fx-background-color: secondary-color;
 }
+
+.clear-button:hover {
+    -fx-background-color: secondary-color;
+}
