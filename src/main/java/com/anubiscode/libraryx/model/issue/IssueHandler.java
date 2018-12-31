@@ -66,4 +66,33 @@ public class IssueHandler {
             return  null;
         }
     }
+
+    @SuppressWarnings("Duplicates")
+    public boolean incrementRenewCount(String bookID) {
+        String sql = "UPDATE ISSUE\n" +
+                "SET RENEWCOUNT = RENEWCOUNT + 1 WHERE BOOKID = ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, bookID);
+            int i = ps.executeUpdate();
+            return i == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public boolean deleteIssued(String bookID) {
+        String sql = "DELETE FROM ISSUE WHERE BOOKID = ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, bookID);
+            int i = ps.executeUpdate();
+            return i == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -94,12 +94,21 @@ public class BookHandler {
         return book;
     }
 
-    public boolean updateIssuedBook(String bookID) {
+    @SuppressWarnings("Duplicates")
+    public boolean updateIssuedBook(String bookID, IssueType issueType) {
         String sql = "UPDATE BOOKS\n" +
-                "SET AVAILABILITY = FALSE WHERE BOOKID = ?";
+                "SET AVAILABILITY = ? WHERE BOOKID = ?";
         try (Connection conn = Database.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, bookID);
+            switch (issueType) {
+                case ISSUING:
+                    ps.setBoolean(1, false);
+                    break;
+                case RETURNING:
+                    ps.setBoolean(1, true);
+                    break;
+            }
+            ps.setString(2, bookID);
             int i = ps.executeUpdate();
             return i == 1;
         } catch (SQLException e) {

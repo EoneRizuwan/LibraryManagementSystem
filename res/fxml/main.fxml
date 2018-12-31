@@ -223,7 +223,7 @@
                                 </VBox.margin>
                             </ListView>
                             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="Renew">
+                                <Button onAction="#renewIssuedCount" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="Renew">
                                     <font>
                                         <Font size="13.0"/>
                                     </font>
@@ -234,7 +234,7 @@
                                         <Insets right="70.0"/>
                                     </HBox.margin>
                                 </Button>
-                                <Button layoutX="243.0" layoutY="21.0" mnemonicParsing="false" prefHeight="42.0"
+                                <Button onAction="#returnIssued" layoutX="243.0" layoutY="21.0" mnemonicParsing="false" prefHeight="42.0"
                                         prefWidth="123.0" text="Return">
                                     <font>
                                         <Font size="13.0"/>
