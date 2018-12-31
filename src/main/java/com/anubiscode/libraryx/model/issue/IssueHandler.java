@@ -4,6 +4,7 @@ import main.java.com.anubiscode.libraryx.model.database.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IssueHandler {
@@ -41,6 +42,28 @@ public class IssueHandler {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public IssueWrapper getIssued(String bookID) {
+        IssueWrapper issueWrapper = null;
+        String sql = "SELECT * FROM ISSUE WHERE BOOKID = ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, bookID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                issueWrapper = new IssueWrapper(
+                        bookID,
+                        rs.getString("memberID"),
+                        rs.getTimestamp("issueTime"),
+                        rs.getInt("renewCount")
+                );
+            }
+            return issueWrapper;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  null;
         }
     }
 }

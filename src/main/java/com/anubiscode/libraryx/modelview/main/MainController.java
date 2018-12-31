@@ -1,7 +1,9 @@
 package main.java.com.anubiscode.libraryx.modelview.main;
 
 import com.jfoenix.effects.JFXDepthManager;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -16,6 +19,7 @@ import javafx.stage.Stage;
 import main.java.com.anubiscode.libraryx.model.book.Book;
 import main.java.com.anubiscode.libraryx.model.book.BookHandler;
 import main.java.com.anubiscode.libraryx.model.issue.IssueHandler;
+import main.java.com.anubiscode.libraryx.model.issue.IssueWrapper;
 import main.java.com.anubiscode.libraryx.model.member.Member;
 import main.java.com.anubiscode.libraryx.model.member.MemberHandler;
 import main.java.com.anubiscode.libraryx.modelview.util.AlertBox;
@@ -33,6 +37,8 @@ public class MainController implements Initializable {
     private Book book;
     private Member member;
 
+    private ObservableList<String> issuedList;
+
     @FXML
     private ObservableList<HBox> infoPanelList;
     @FXML
@@ -43,6 +49,11 @@ public class MainController implements Initializable {
     private TextField bookID;
     @FXML
     private TextField memberID;
+    @FXML
+    private TextField issuedBookID;
+    @FXML
+    private ListView<String> issuedListView;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,6 +62,8 @@ public class MainController implements Initializable {
         issueHandler = new IssueHandler();
         book = null;
         member = null;
+
+        issuedList = FXCollections.observableArrayList();
 
         for (HBox hBox : infoPanelList) JFXDepthManager.setDepth(hBox, 1);
     }
@@ -142,5 +155,37 @@ public class MainController implements Initializable {
         } else {
             AlertBox.show(Alert.AlertType.ERROR, null, "Please try to search the book and member again.", false);
         }
+    }
+
+    @FXML
+    private void loadIssuedInfos() {
+        IssueWrapper issueWrapper = issueHandler.getIssued(issuedBookID.getText().trim().toUpperCase());
+        if (issueWrapper == null) {
+            // todo tell the user that the book id provided was not issued yet
+            return;
+        }
+        fillIssuedListView(issueWrapper);
+        issuedListView.setItems(issuedList);
+    }
+
+    private void fillIssuedListView(IssueWrapper issueWrapper) {
+        issuedList.clear();
+        issuedList.add("ISSUE INFO");
+        issuedList.add("\tTime: " + issueWrapper.getIssueTime().toLocalDateTime());
+        issuedList.add("\tRenew Count: " + issueWrapper.getRenewCount());
+        issuedList.add(" ");
+
+        Book issuedBook = bookHandler.getBookByID(issueWrapper.getBookID());
+        issuedList.add("BOOK INFO");
+        issuedList.add("\tTitle: " + issuedBook.getTitle());
+        issuedList.add("\tAuthor: " + issuedBook.getAuthor());
+        issuedList.add("\tPublisher: " + issuedBook.getPub());
+        issuedList.add(" ");
+
+        Member issuedMember = memberHandler.getMemberByID(issueWrapper.getMemberID());
+        issuedList.add("MEMBER INFO");
+        issuedList.add("\tName: " + issuedMember.getName());
+        issuedList.add("\tPhone No: " + issuedMember.getContactNo());
+        issuedList.add("\tEmail: " + issuedMember.getEmail());
     }
 }
