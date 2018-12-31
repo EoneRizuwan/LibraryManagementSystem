@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -116,19 +115,32 @@ public class MainController implements Initializable {
     @FXML
     private void loadIssueOp() {
         if (book != null && member != null) {
-            String content = "Book Title : " + book.getTitle() + "\n\tto\n" +
+            String content = "Book Title : " + book.getTitle() + "\n" +
                     "Member : " + member.getName();
 
             Optional<ButtonType> response = AlertBox.showAndWait(Alert.AlertType.CONFIRMATION, "Proceed Issue Operation?", content).showAndWait();
             if (response.isPresent() && response.get() == ButtonType.OK) {
+
+                // Check if the book was available or not.
+                if (!book.getAvail().equals("YES")) {
+                    AlertBox.show(Alert.AlertType.WARNING, null, "The book was unavailable to be issued.", false);
+                    return;
+                }
+
                 boolean update = issueHandler.addIssue(book.getId(), member.getId());
                 if (update) {
                     bookInfoList.get(3).setText("Not Available");
-                    // todo update book availability in database
+                    if (bookHandler.updateIssuedBook(book.getId())) System.out.println("Database update successful");
+                    else System.err.println("Database update was unsuccessful");
                     AlertBox.show(Alert.AlertType.INFORMATION, null, "Issuing was successful.", false);
+                    book.setAvail("NO");
+                } else {
+                    AlertBox.show(Alert.AlertType.ERROR, null, "There was an error while trying to issued the book.\n" +
+                            "Please Try again later.", false);
                 }
-                else AlertBox.show(Alert.AlertType.WARNING, null, "The book is unavailable to be issued for now.", false);
             }
-        } else AlertBox.show(Alert.AlertType.ERROR, null, "Please try to search the book and member again.", false);
+        } else {
+            AlertBox.show(Alert.AlertType.ERROR, null, "Please try to search the book and member again.", false);
+        }
     }
 }

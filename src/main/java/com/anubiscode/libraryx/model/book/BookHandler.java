@@ -93,4 +93,18 @@ public class BookHandler {
         }
         return book;
     }
+
+    public boolean updateIssuedBook(String bookID) {
+        String sql = "UPDATE BOOKS\n" +
+                "SET AVAILABILITY = FALSE WHERE BOOKID = ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, bookID);
+            int i = ps.executeUpdate();
+            return i == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
