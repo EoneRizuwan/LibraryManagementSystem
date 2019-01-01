@@ -2,10 +2,7 @@ package main.java.com.anubiscode.libraryx.model.issue;
 
 import main.java.com.anubiscode.libraryx.model.database.Database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class IssueHandler {
 
@@ -68,17 +65,19 @@ public class IssueHandler {
     }
 
     @SuppressWarnings("Duplicates")
-    public boolean incrementRenewCount(String bookID) {
+    public IssueWrapper incrementRenewCount(String bookID) {
         String sql = "UPDATE ISSUE\n" +
-                "SET RENEWCOUNT = RENEWCOUNT + 1 WHERE BOOKID = ?";
+                "SET RENEWCOUNT = RENEWCOUNT + 1, ISSUETIME = CURRENT_TIMESTAMP\n" +
+                "WHERE BOOKID = ?";
         try (Connection conn = Database.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, bookID);
             int i = ps.executeUpdate();
-            return i == 1;
+            if (i != 1) return null;
+            return getIssued(bookID);
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

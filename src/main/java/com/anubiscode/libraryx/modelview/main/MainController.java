@@ -26,6 +26,7 @@ import main.java.com.anubiscode.libraryx.modelview.util.AlertBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -161,7 +162,7 @@ public class MainController implements Initializable {
                 } else {
                     AlertBox.show(Alert.AlertType.ERROR, null,
                             "There was an error while trying to issued the book.\n" +
-                            "Please Try again later.", false);
+                                    "Please Try again later.", false);
                 }
             }
         } else {
@@ -211,12 +212,14 @@ public class MainController implements Initializable {
             Optional<ButtonType> choice = AlertBox.showAndWait(Alert.AlertType.CONFIRMATION, null,
                     "Proceed to renewing the current issued?").showAndWait();
             if (choice.isPresent() && choice.get() == ButtonType.OK) {
-                if (issueHandler.incrementRenewCount(issueWrapper.getBookID())) {
-                    issueWrapper.setRenewCount(issueWrapper.getRenewCount() + 1);
+                issueWrapper = issueHandler.incrementRenewCount(issueWrapper.getBookID());
+                if (issueWrapper != null) {
                     fillIssuedListView(issueWrapper);
-
                     AlertBox.show(Alert.AlertType.INFORMATION, null,
                             "Issued was renewed.", false);
+                } else {
+                    AlertBox.show(Alert.AlertType.ERROR, null, "There was an error when trying to renew the book.\n" +
+                            "Please try again later.", false);
                 }
             }
         } else {
@@ -225,6 +228,7 @@ public class MainController implements Initializable {
                             "Please try searching another Book ID again.", false);
         }
     }
+
 
     @FXML
     private void returnIssued() {
